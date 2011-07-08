@@ -52,11 +52,7 @@ class LazyLoad extends System
 			return $strContent;
 		}
 
-
-		$strContent = preg_replace('(\<[img].*(src="(\S+)").*\/\>)','zzz' , $strContent);
-
-
-		return $strContent;
+		return preg_replace_callback('~<img.*?(src=".*?").*?>~is', array($this, 'replaceAttributesCallback'), $strContent);
 	}
 
 
@@ -107,12 +103,33 @@ class LazyLoad extends System
 
 		if ($objRootPage->ll_use != '')
 		{
+			$GLOBALS['lazy_load_realSrcAttribute'] = $objRootPage->ll_realSrcAttribute;
 			$GLOBALS['lazy_load'] = 'yes';
 		}
 		else
 		{
 			$GLOBALS['lazy_load'] = 'no';
 		}
+	}
+
+
+	/**
+	 * Preg Callback
+	 * 
+	 * @param preg_replace_callback $arrData
+	 * @return string
+	 */
+	protected function replaceAttributesCallback($arrData)
+	{
+		// never replace the cron.php "image"
+		if (strpos($arrData[0], 'cron.php'))
+		{
+			return $arrData[0];
+		}
+
+		//TODO: find a better solution, because this sucks
+		$strUrl = substr($arrData[1], 5, -1);
+		return str_replace($arrData[1], 'src="system/modules/lazy_load/html/blank.gif" ' . $GLOBALS['lazy_load_realSrcAttribute'] . '="' . $strUrl . '"', $arrData[0]);
 	}
 }
 
