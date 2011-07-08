@@ -53,7 +53,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ll_range'] = array
 	'inputType'		=> 'text',
 	'exclude'		=> true,
 	'default'		=> '200',
-	'eval'			=> array('tl_class'=>'w50', 'rgxp'=>'digit')
+	'eval'			=> array('tl_class'=>'w50', 'rgxp'=>'digit', 'mandatory'=>true)
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['ll_elements'] = array
@@ -62,7 +62,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ll_elements'] = array
 	'inputType'		=> 'text',
 	'exclude'		=> true,
 	'default'		=> 'img',
-	'eval'			=> array('tl_class'=>'w50')
+	'eval'			=> array('tl_class'=>'w50', 'mandatory'=>true)
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['ll_mode'] = array
@@ -82,7 +82,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ll_realSrcAttribute'] = array
 	'inputType'		=> 'text',
 	'exclude'		=> true,
 	'default'		=> 'data-src',
-	'eval'			=> array('tl_class'=>'w50')
+	'eval'			=> array('tl_class'=>'w50', 'mandatory'=>true)
 );
 
 $GLOBALS['TL_DCA']['tl_page']['fields']['ll_useFade'] = array
